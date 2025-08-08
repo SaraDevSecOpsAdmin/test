@@ -48,16 +48,19 @@ jobs:
           push: false  # change to true if you want to push to Docker Hub
           tags: myapp:latest
 
-      - name: Install Docker Scout extension
-        run: docker extension install docker/scout-cli
+      - name: Download Docker Scout CLI
+        run: curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
 
          echo ${{secrets.DOCKER_PASSWORD}} | docker login -u ${{secrets.DOCKER_USERNAME}} --password-stdin
 
-      - name: Initialize Docker Scout
-        run: docker scout init
+      - name: Install Docker Scout CLI
+        run: bash install-scout.sh
 
-      - name: Run Docker Scout
-        run: docker scout quickview
+      - name: Verify Scout CLI
+        run: scout version
+
+      - name: Run Docker Scout (Quickview)
+        run: scout quickview
          
 
  
