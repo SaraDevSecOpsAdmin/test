@@ -48,22 +48,31 @@ jobs:
           push: false  # change to true if you want to push to Docker Hub
           tags: myapp:latest
 
-      - name: Download Docker Scout CLI
-        run: curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
+      #- name: Download Docker Scout CLI
+        #run: curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
 
-         echo ${{secrets.DOCKER_PASSWORD}} | docker login -u ${{secrets.DOCKER_USERNAME}} --password-stdin
+         #echo ${{secrets.DOCKER_PASSWORD}} | docker login -u ${{secrets.DOCKER_USERNAME}} --password-stdin
 
-      - name: Install Docker Scout CLI
-        run: bash install-scout.sh
+      #- name: Install Docker Scout CLI
+        #run: bash install-scout.sh
 
-      - name: Add Scout CLI to PATH
-        run: echo "$HOME/.docker/cli-plugins" >> $GITHUB_PATH
+      #- name: Add Scout CLI to PATH
+        #run: echo "$HOME/.docker/cli-plugins" >> $GITHUB_PATH
 
-      - name: Run Docker Scout (Quickview)
-        run: docker scout quickview
+      #- name: Run Docker Scout (Quickview)
+        #run: docker scout quickview
 
-      - name: Run Docker Scout (Quickview)
-        run: docker scout cves
+      #- name: Run Docker Scout (cves)
+        #run: docker scout cves
+
+      - name: Docker Scout Scan
+        uses: docker/scout-action@v1.18.2
+        with: 
+          dockerhub-user: ${{secrets.DOCKER_USERNAME}}
+          dockerhub-password: ${{secrets.DOCKER_PASSWORD}}
+          command: quickview, cves
+
+        
               
          
 
