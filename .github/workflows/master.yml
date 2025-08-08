@@ -56,6 +56,9 @@ jobs:
       - name: Install Docker Scout CLI
         run: bash install-scout.sh
 
+      - name: Add Scout CLI to PATH
+        run: echo "$HOME/.docker/cli-plugins" >> $GITHUB_PATH
+
       - name: Verify Scout CLI
         run: scout version
 
