@@ -60,7 +60,7 @@ jobs:
         run: echo "$HOME/.docker/cli-plugins" >> $GITHUB_PATH
 
       - name: Run Docker Scout (Quickview)
-        run: scout quickview
+        run: docker scout quickview
          
 
  
